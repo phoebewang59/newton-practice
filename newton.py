@@ -16,7 +16,7 @@ def optimize(f, x0, h=1e-6):
         x_new = x - derivative(f, x, h) / second_derivative(f, x, h)
 
         # Stopping criterion
-        if abs(x_new - x) < 1e-6:
+        if abs(x_new - x) < 1e-67:
             break
 
         x = x_new
