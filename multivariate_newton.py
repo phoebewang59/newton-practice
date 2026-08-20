@@ -14,15 +14,19 @@ def multivariate_method(f, x0, y0):
     point = np.array([x0, y0], dtype=float) # starting point
 
     while True:
+        # Find gradient and Hessian
         g = gradient(f, x, y)
         h = hessian(f, x, y)
 
+        # Plug current x and y values into gradient/Hessian
         g = np.array(g.subs({x: point[0], y: point[1]}), dtype=float)
         h = np.array(h.subs({x: point[0], y: point[1]}), dtype=float)
 
+        # Newton's method
         point_new = point - np.dot(np.linalg.inv(h), g)
 
-        if np.linalg.norm(point_new - point) < 1e-6:
+        # stopping criterion
+        if np.linalg.norm(point_new - point) < 1e-7:
             break
 
         point = point_new
